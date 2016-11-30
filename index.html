@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta data-name="scale" data-content-width="750">
+    <script src="scale.js"></script>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <title></title>
+</head>
+<body>
+    <!-- <audio autoplay="autoplay" src="happy-birthday.mp3"></audio> -->
+    <section id="container">
+        <section id="look">
+            <section id="stage">
+                <div id="aroundBox"></div>
+                <div id="cakeBox"></div>
+            </section>
+        </section>
+    </section>
+<script src="index.js"></script>
+<script>
+
+    var lookController = Controller3D(look, -20, 0, 300)
+    var stageController = Controller3D(stage, 0, 0, 0)
+    var cakeController = Controller3D(cakeBox, 0, 0, 0)
+    var aroundController = Controller3D(aroundBox, 0, 0, 0)
+
+    window.addEventListener('load', () => {
+        createCake()
+        createAround()
+    })
+</script>
+<script>
+    const cakeTopWidth = 300
+    const cakeCenterWidth = 300
+    const cakeBottomWidth = 300
+
+    let stageNo
+
+    function createCake() {
+        const commonStyle = {
+            left: '50%',
+            marginLeft: '-150px',
+        }
+
+        const cakeLayerTop = new Cylinder(cakeTopWidth, 50, Object.assign({
+            background: '#FEFAE9',
+            top: '100px',
+        }, commonStyle), createHappyBrithday()).appendTo(cakeBox)
+
+        const cakeLayerTopS = new Cylinder(cakeTopWidth, 20, Object.assign({
+            background: '#8A6961',
+            top: '150px'
+        }, commonStyle)).appendTo(cakeBox)
+        const cakeLayerCenter = new Cylinder(cakeCenterWidth, 50, Object.assign({
+            background: '#fcd690',
+            top: '170px'
+        }, commonStyle)).appendTo(cakeBox)
+        const cakeLayerCenterS = new Cylinder(cakeCenterWidth, 20, Object.assign({
+            background: '#8A6961',
+            top: '220px'
+        }, commonStyle)).appendTo(cakeBox)
+        const cakeLayerBottom = new Cylinder(cakeBottomWidth, 50, Object.assign({
+            background: '#febbaf',
+            top: '240px'
+        }, commonStyle)).appendTo(cakeBox)
+        const cakeLayerBottomS = new Cylinder(cakeBottomWidth, 20, Object.assign({
+            background: '#8A6961',
+            top: '290px'
+        }, commonStyle)).appendTo(cakeBox)
+    }
+
+    function createAround() {
+        const around = new CylinderX(10, {
+            width: '200px',
+            height: '200px',
+            background: '#FEFAE9',
+            top: '-300px',
+            border: '20px solid #8A6961',
+            borderRadius: '100%',
+            opacity: '0.6'
+        }).appendTo(aroundBox)
+    }
+
+    function createHappyBrithday() {
+        const content = document.createElement('p')
+        const style = {
+            width: cakeTopWidth + 'px',
+            height: cakeTopWidth + 'px',
+            lineHeight: cakeTopWidth + 'px',
+            textAlign: 'center',
+            fontSize: '30px',
+            color: '#8A6961',
+            background: 'url(logo.png) center center no-repeat',
+            backgroundSize: '220px 80px'
+        }
+        for (const key in style)
+            content.style[key] = style[key]
+        return content
+    }
+</script>
+<script>
+    /*
+    *
+    *  入场动画
+    *
+    */
+    const initStageStyle = {
+        opacity: 0
+    }
+</script>
+<script>
+    (() => {
+
+        const pos = {
+            x: 0,
+            y: 0
+        }
+        let disX, disY, flag
+
+        window.addEventListener('touchstart', start)
+        window.addEventListener('touchmove', moving)
+        window.addEventListener('mousedown', start)
+        window.addEventListener('mousemove', moving)
+        window.addEventListener('mouseup', () => {
+            flag = false
+        })
+
+        function start(e) {
+            flag = true
+            let clientX, clientY
+            if (e.touches) {
+                clientX = e.touches[0].clientX
+                clientY = e.touches[0].clientY
+            } else {
+                clientX = e.clientX
+                clientY = e.clientY
+            }
+            pos.x = clientX
+            pos.y = clientY
+        }
+
+        function moving(e) {
+            if (!flag)
+                return
+            e.preventDefault()
+            let clientX, clientY
+            if (e.touches) {
+                clientX = e.touches[0].clientX
+                clientY = e.touches[0].clientY
+            } else {
+                clientX = e.clientX
+                clientY = e.clientY
+            }
+            disX = clientX - pos.x
+            disY = clientY - pos.y
+            pos.x = clientX
+            pos.y = clientY
+            lookAround(disX, disY)
+        }
+
+    })()
+
+    function lookAround(disX, disY) {
+        const inf = stageController.getInf()
+
+        if (inf.rotateX + disY > 10 || inf.rotateX + disY < -20)
+            return
+
+        stageController.rotateY(disX)
+        stageController.rotateX(disY)
+        stageController.update()
+    }
+
+    function lookLear(bool = true, dis = 10) {
+        const inf = lookController.getInf()
+
+        if (inf.translateZ + dis > 400 || inf.translateZ + dis < -2000)
+            return
+        if (bool)
+            lookController.translateZ(10)
+        else   
+            lookController.translateZ(-10)
+        lookController.update()
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,5 @@
+<?php   
+    
+    $pdo = new PDO();   
+
+ ?>
