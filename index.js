@@ -5,20 +5,17 @@ const Controller3D = (body, x = 0, y = 0, z = 0) => {
         translateZ: z
     }
 
-    function rotateX(newX) {
-        const distance = newX - x
+    function rotateX(distance) {
         const oldRotateX = getTransfrom('rotateX')
         inf.rotateX = oldRotateX + distance
     }
 
-    function rotateY(newY) {
-        const distance = newY - y
+    function rotateY(distance) {
         const oldRotateY = getTransfrom('rotateY')
         inf.rotateY = oldRotateY + distance
     }
 
-    function translateZ(newZ) {
-        const distance = newZ - z
+    function translateZ(distance) {
         const oldTranslateZ = getTransfrom('translateZ')
         inf.translateZ = oldTranslateZ + distance
     }
@@ -77,7 +74,7 @@ class Cylinder {
         const mixStyle = Object.assign({}, style, {
             width: r,
             height: r,
-            borderRadius: '100%',
+            borderRadius: style.borderRadius || '100%',
             transform: Cylinder.rotateX + ' ' + `translateZ(${parseFloat(r) / 2}px)`,
             position: Cylinder.position,
             top: parseFloat(style.top) + i + 'px'
@@ -102,13 +99,14 @@ class CylinderX {
         this.DOMArr = []
         this.num = num
         this.style = style
-        this.child = child || []
+        this.child = child.reverse() || []
         this.dis = 100
+        this.deg
         this.init()
     }
     init() {
         const tmp = document.createDocumentFragment()
-        const deg = 360 / this.num
+        const deg = this.deg = 360 / this.num
         const len = this.len = parseFloat(this.style.width) / 2 / Math.tan(Math.PI / this.num / 2) + this.dis
         let DOM
         for (let i = 0; i < this.num; i ++) {

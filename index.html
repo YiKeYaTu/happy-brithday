@@ -8,6 +8,7 @@
     <title></title>
 </head>
 <body>
+    <section id="cover"></section>
     <!-- <audio autoplay="autoplay" src="happy-birthday.mp3"></audio> -->
     <section id="container">
         <section id="look">
@@ -18,22 +19,27 @@
         </section>
     </section>
 <script src="index.js"></script>
+<script src="anmation.js"></script>
+<script src="orienter.js"></script>
 <script>
 
     var lookController = Controller3D(look, -20, 0, 300)
-    var stageController = Controller3D(stage, 0, 0, 0)
+    var stageController = Controller3D(stage, 0, 576, 0)
     var cakeController = Controller3D(cakeBox, 0, 0, 0)
     var aroundController = Controller3D(aroundBox, 0, 0, 0)
 
     window.addEventListener('load', () => {
         createCake()
         createAround()
+        startAnmation()
     })
 </script>
 <script>
     const cakeTopWidth = 300
     const cakeCenterWidth = 300
     const cakeBottomWidth = 300
+
+    const candleWidth = 8
 
     let stageNo
 
@@ -68,7 +74,85 @@
             background: '#8A6961',
             top: '290px'
         }, commonStyle)).appendTo(cakeBox)
+
+        new Cylinder(candleWidth, 20, Object.assign({
+            background: '#8A6961',
+            top: '80px',
+            left: '-80px'
+        })).appendTo(cakeBox)
+        new Cylinder(candleWidth, 20, Object.assign({
+            background: '#FEFAE9',
+            top: '60px',
+            left: '-80px'
+        })).appendTo(cakeBox)
+        new Cylinder(candleWidth, 20, Object.assign({
+            background: '#8A6961',
+            top: '40px',
+            left: '-80px'
+        })).appendTo(cakeBox)
+        new Cylinder(candleWidth, 20, Object.assign({
+            background: '#FEFAE9',
+            top: '20px',
+            left: '-80px'
+        })).appendTo(cakeBox)
+        new Cylinder(candleWidth, 20, Object.assign({
+            background: '#8A6961',
+            top: '0px',
+            left: '-80px'
+        })).appendTo(cakeBox)
+
+        new Cylinder(candleWidth, 20, Object.assign({
+            background: '#8A6961',
+            top: '80px',
+            right: '-80px'
+        })).appendTo(cakeBox)
+        new Cylinder(candleWidth, 20, Object.assign({
+            background: '#FEFAE9',
+            top: '60px',
+            right: '-80px'
+        })).appendTo(cakeBox)
+        new Cylinder(candleWidth, 20, Object.assign({
+            background: '#8A6961',
+            top: '40px',
+            right: '-80px'
+        })).appendTo(cakeBox)
+        new Cylinder(candleWidth, 20, Object.assign({
+            background: '#FEFAE9',
+            top: '20px',
+            right: '-80px'
+        })).appendTo(cakeBox)
+        new Cylinder(candleWidth, 20, Object.assign({
+            background: '#8A6961',
+            top: '0px',
+            right: '-80px'
+        })).appendTo(cakeBox)
+
+        new Cylinder(14, 14, Object.assign({
+            background: '#febbaf',
+            top: '-20px',
+            right: '-83px',
+            borderRadius: '0px'
+        })).appendTo(cakeBox)
+        new Cylinder(14, 14, Object.assign({
+            background: '#febbaf',
+            top: '-20px',
+            left: '-83px',
+            borderRadius: '0px'
+        })).appendTo(cakeBox)
     }
+
+    const aroundPicSrc = [
+        './a1.jpg', 
+        './a1.jpg',
+        './a1.jpg',
+        './a1.jpg',
+        './a1.jpg',
+        './a1.jpg',
+        './a1.jpg',
+        './a1.jpg',
+        './a1.jpg',
+        './a1.jpg'
+    ]
 
     function createAround() {
         const around = new CylinderX(10, {
@@ -78,8 +162,22 @@
             top: '-300px',
             border: '20px solid #8A6961',
             borderRadius: '100%',
-            opacity: '0.6'
-        }).appendTo(aroundBox)
+            opacity: '0.6',
+            overflow: 'hidden'
+        }, createAroundPic(aroundPicSrc)).appendTo(aroundBox)
+        window.deg = around.deg
+        window.picZ = around.len
+    }
+
+    function createAroundPic(aroundPicSrc) {
+        return aroundPicSrc.map(function(item) {
+            const img = document.createElement('img')
+            img.src = item
+            img.style.transform = 'rotateY(180deg)'
+            img.style.width = '100%'
+            img.style.height = '100%'
+            return img
+        })
     }
 
     function createHappyBrithday() {
@@ -105,8 +203,92 @@
     *  入场动画
     *
     */
-    const initStageStyle = {
-        opacity: 0
+    function startAnmation() {
+        const director = new Anmation()
+        director.add(
+            stage, {
+                startStyle: {
+                    transform: 'rotateX(0deg) rotateY(0deg) translateZ(0px)'
+                },
+                endStyle: {
+                    transform: 'rotateX(0deg) rotateY(576deg) translateZ(0px)'
+                },
+                startIn: 0,
+                // endIn: 10
+                endIn: 7000
+            }
+        )
+        director.add(
+            look, {
+                startStyle: {
+                    transform: 'rotateX(0deg) rotateY(0deg) translateZ(-8000px)'
+                },
+                endStyle: {
+                    transform: 'rotateX(-20deg) rotateY(0deg) translateZ(300px)'
+                },
+                startIn: 0,
+                // endIn: 10
+                endIn: 4000
+            }
+        )
+        const x = window.innerWidth / 2
+        const y = window.innerHeight / 2
+        let r = 0
+
+        director.add(
+            cover, {
+                startIn: 0,
+                // endIn: 0
+                endIn: 16000
+            }, false, () => {
+                r += 2
+                cover.style.background = `-webkit-gradient(radial,${x} ${y},0,${x} ${y},${r},from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 1)))`
+            }
+        )
+
+        for (let i = 1, len = aroundPicSrc.length + 1; i < len; i ++) {
+            director.add(
+                aroundBox, {
+                    startIn: (i + 1) * 8000,
+                    endIn: (i + 1) * 8000 + 3000,
+                    startStyle: {
+                        transform: `rotateY(${(i - 1) * window.deg}deg)`,
+                    },
+                    endStyle: {
+                        transform: `rotateY(${(i) * window.deg}deg)`,
+                    }
+                }, true
+            )
+            const item = aroundBox.children[aroundBox.children.length - i]
+            director.add(
+                item, {
+                    startIn: i * 9000,
+                    endIn: i * 9000 + 3000,
+                    startStyle: {
+                        transform: `${item.style.transform}`,
+                    },
+                    endStyle: {
+                        transform: `${item.style.transform.replace(/translateZ\(.+?\)/, '')} translateZ(${window.picZ - 1000}px)`,
+                        opacity: '1'
+                    }
+                }, true
+            )
+            director.add(
+                item, {
+                    startIn: i * 12000,
+                    endIn: i * 12000 + 3000,
+                    startStyle: {
+                        transform: `${item.style.transform}`,
+                    },
+                    endStyle: {
+                        transform: `${item.style.transform.replace(/translateZ\(.+?\)/, '')} translateZ(${window.picZ}px)`,
+                        opacity: '0.6'
+                    }
+                }, true
+            )
+        }
+        director.init()
+        director.start()
     }
 </script>
 <script>
@@ -116,48 +298,19 @@
             x: 0,
             y: 0
         }
-        let disX, disY, flag
+        let olat, olon, flag = false
 
-        window.addEventListener('touchstart', start)
-        window.addEventListener('touchmove', moving)
-        window.addEventListener('mousedown', start)
-        window.addEventListener('mousemove', moving)
-        window.addEventListener('mouseup', () => {
-            flag = false
-        })
-
-        function start(e) {
-            flag = true
-            let clientX, clientY
-            if (e.touches) {
-                clientX = e.touches[0].clientX
-                clientY = e.touches[0].clientY
-            } else {
-                clientX = e.clientX
-                clientY = e.clientY
-            }
-            pos.x = clientX
-            pos.y = clientY
-        }
-
-        function moving(e) {
-            if (!flag)
-                return
-            e.preventDefault()
-            let clientX, clientY
-            if (e.touches) {
-                clientX = e.touches[0].clientX
-                clientY = e.touches[0].clientY
-            } else {
-                clientX = e.clientX
-                clientY = e.clientY
-            }
-            disX = clientX - pos.x
-            disY = clientY - pos.y
-            pos.x = clientX
-            pos.y = clientY
-            lookAround(disX, disY)
-        }
+        setTimeout(() => {
+            const o = new Orienter({
+                orient (inf) {
+                    if (olat)
+                        lookAround(inf.lon - olon, inf.lat - olat)
+                    olat = inf.lat
+                    olon = inf.lon
+                }
+            })
+            o.init()
+        }, 8000)
 
     })()
 
