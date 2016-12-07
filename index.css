@@ -126,3 +126,16 @@ p {
     opacity: 0;
     font-size: 18px;
 }
+#heka {
+    width: 140px;
+    height: 100px;
+    background: #FEFAE9;
+    position: absolute;
+    top: 800px;
+    -webkit-transform: translateZ(180px) rotateX(30deg);
+    left: 50%;
+    margin-left: -70px;
+    color: #8A6961;
+    font-size: 12px;
+    padding: 10px 10px;
+}
