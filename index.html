@@ -53,7 +53,19 @@
 
         }
     }
+    var old
     window.addEventListener('load', init)
+    window.addEventListener('touchstart', function(e) {
+        if(stageinf !== 'stage2')
+            return
+        old = e.touches[0].clientY
+    })
+    window.addEventListener('touchstart', function(e) {
+        if(stageinf !== 'stage2')
+            return
+        lookLear(e.touches[0].clientY - old)
+        old = e.touches[0].clientY
+    })
 
 
     function init() {
@@ -418,15 +430,11 @@
             stageController.update()
         }
 
-        function lookLear(bool = true, dis = 10) {
+        function lookLear(dis) {
             var inf = lookController.getInf()
-
             if (inf.translateZ + dis > 400 || inf.translateZ + dis < -2000)
                 return
-            if (bool)
-                lookController.translateZ(10)
-            else   
-                lookController.translateZ(-10)
+            lookController.translateZ(dis)
             lookController.update()
         }
         createCake()
