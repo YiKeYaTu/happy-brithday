@@ -131,16 +131,23 @@ p {
     position: absolute;
     letter-spacing: 1px;
     top: 640px;
-    -webkit-transform: translateZ(190px) rotateX(30deg);
+    -webkit-transform: translateZ(200px) rotateX(30deg);
     left: 50%;
     margin-left: -70px;
     color: #8A6961;
     font-size: 12px;
     padding: 10px 10px;
-    background: #FEFAE9 url(heart.png) 100px 124px no-repeat;
+    background: #FEFAE9;
     background-size: 20px 20px;
 }
 #heka > span {
     float: right;
     margin-top: 10px;
+}
+#heka > img {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    bottom: 5px;
+    right: 58px;
 }
