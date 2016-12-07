@@ -435,7 +435,7 @@
                 var o = new Orienter({
                     orient (inf) {
                         if (olat)
-                            lookAround(inf.lon - olon, inf.lat - olat)
+                            lookAround(olon - inf.lon, inf.lat - olat)
                         olat = inf.lat
                         olon = inf.lon
                     }
