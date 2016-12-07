@@ -48,7 +48,7 @@ p {
     margin: auto;
     z-index: 1;
 }
-#cakeBox {
+#cakeBox, #cakeWord, #cakeBless {
     width: 100px;
     height: 100px;
     transform-style: preserve-3d;
@@ -78,15 +78,4 @@ p {
     z-index: 1;
     opacity: 0;
     font-size: 18px;
-}
-#my-blessing {
-    width: 600px;
-    height: 600px;
-    color: blue;
-    background: #febbaf;
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin: -300px -300px;
-    transform: rotateX(100deg) translateZ(-1000px);
 }

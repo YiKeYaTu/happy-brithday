@@ -15,9 +15,8 @@
             <section id="stage">
                 <div id="aroundBox"></div>
                 <div id="cakeBox"></div>
-            </section>
-            <section id="my-blessing">
-                黑恶化IE呵呵IE和IE
+                <div id="cakeBless"></div>
+                <div id="cakeWord"></div>
             </section>
         </section>
     </section>
@@ -75,7 +74,7 @@
                 left: '50%',
                 marginLeft: '-150px',
             }
-
+            //生日蛋糕
             var cakeLayerTop = new Cylinder(cakeTopWidth, 50, Object.assign({
                 background: '#FEFAE9',
                 top: '100px',
@@ -166,6 +165,39 @@
                 left: '-83px',
                 borderRadius: '0px'
             })).appendTo(cakeBox)
+
+
+            // 祝福蛋糕
+            var commonBlessStyle = {
+                left: '50%',
+                marginLeft: '-300px',
+                borderRadius: '0px'
+            }
+            var cakeLayerTop = new Cylinder(600, 50, Object.assign({
+                background: '#FEFAE9',
+                top: '800px',
+            }, commonBlessStyle), createHappyBrithday('hahhsahsaihsaihas')).appendTo(cakeBless)
+
+            var cakeLayerTopS = new Cylinder(600, 20, Object.assign({
+                background: '#8A6961',
+                top: '850px'
+            }, commonBlessStyle)).appendTo(cakeBless)
+            var cakeLayerCenter = new Cylinder(600, 50, Object.assign({
+                background: '#fcd690',
+                top: '870px'
+            }, commonBlessStyle)).appendTo(cakeBox)
+            var cakeLayerCenterS = new Cylinder(600, 20, Object.assign({
+                background: '#8A6961',
+                top: '920px'
+            }, commonBlessStyle)).appendTo(cakeBox)
+            var cakeLayerBottom = new Cylinder(600, 50, Object.assign({
+                background: '#febbaf',
+                top: '940px'
+            }, commonBlessStyle)).appendTo(cakeBox)
+            var cakeLayerBottomS = new Cylinder(600, 20, Object.assign({
+                background: '#8A6961',
+                top: '990px'
+            }, commonBlessStyle)).appendTo(cakeBox)
         }
 
         var aroundPicSrc = [{
@@ -193,7 +225,7 @@
                 text: '一起走过了209天',
                 src: './a1.jpg'
             }, {
-                text: '恭喜宝宝啊',
+                text: '恭喜你又长大一岁',
                 src: './a1.jpg'
             }, {
                 text: '生日快乐！',
@@ -228,7 +260,7 @@
             })
         }
 
-        function createHappyBrithday() {
+        function createHappyBrithday(html) {
             var content = document.createElement('p')
             var style = {
                 width: cakeTopWidth + 'px',
@@ -237,11 +269,13 @@
                 textAlign: 'center',
                 fontSize: '30px',
                 color: '#8A6961',
-                background: 'url(logo.png) center center no-repeat',
+                background: html ? '' : 'url(logo.png) center center no-repeat',
                 backgroundSize: '220px 80px'
             }
             for (var key in style)
                 content.style[key] = style[key]
+            if (html)
+                content.innerHTML = html
             return content
         }
         /*
@@ -287,7 +321,7 @@
                     // endIn: 0
                     endIn: 16000
                 }, false, function() {
-                    r += 2
+                    r += 4
                     cover.style.background = `-webkit-gradient(radial,${x} ${y},0,${x} ${y},${r},from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 1)))`
                 }
             )
