@@ -9,7 +9,8 @@
 </head>
 <body>
     <section id="cover"></section>
-    <audio autoplay="autoplay" preload src="happy-birthday.mp3"></audio>
+    <section id="cover1"></section>
+    <audio id="mp" preload src="happy-birthday.mp3"></audio>
     <section id="container">
         <section id="look">
             <section id="stage">
@@ -43,27 +44,44 @@
         }
     }())
 
-    var lookController = Controller3D(look, -10, 0, 300)
-    var stageController = Controller3D(stage, 0, 576, 0)
-    var cakeController = Controller3D(cakeBox, 0, 0, 0)
-    var aroundController = Controller3D(aroundBox, 0, 0, 0)
-    var stageinf = 'stage1'
-    var lookDisabled = {
-        stage1: {
-            x1: 572,
-            x2: 580, 
-            y1: -20,
-            y2: -20
-        },
-        stage2: {
-            y1: 80,
-            y2: -80
-        }
-    }
+    
     var old
-    window.addEventListener('load', init)
+    var timer
+    window.addEventListener('load', function jud() {
+        var endTime = new Date('Wed Dec 7 2016 23:59:50')
+        var dis = Date.now() - endTime.getTime() 
+        if (dis > 0) {
+            cover1.style.opacity = 0
+            mp.play()
+            init()
+        } else {
+            var day = Math.floor(-dis / 86400000)
+            cover1.style.lineHeight = window.innerHeight + 'px'
+            cover1.innerHTML = new Date().getHours() + ':' + new Date().getMinutes() + ':' + new Date().getSeconds()
+            timer = setTimeout(function() {
+                jud()
+            }, 1000)
+        }
+    })
 
     function init() {
+        // var lookController = Controller3D(look, -10, 0, 300)
+        // var stageController = Controller3D(stage, 0, 576, 0)
+        // var cakeController = Controller3D(cakeBox, 0, 0, 0)
+        // var aroundController = Controller3D(aroundBox, 0, 0, 0)
+        var stageinf = 'stage2'
+        var lookDisabled = {
+            stage1: {
+                x1: 572,
+                x2: 580, 
+                y1: -20,
+                y2: -20
+            },
+            stage2: {
+                y1: 80,
+                y2: -80
+            }
+        }
         var cakeTopWidth = 300
         var cakeCenterWidth = 300
         var cakeBottomWidth = 300
@@ -227,7 +245,7 @@
                     <img class="pic-bg" src="${item.src}"></img>
                     <p class="pic-text">${item.text}</p>
                 `
-                div.style.transform = 'rotateY(180deg)'
+                div.style.WebkitTransform = 'rotateY(180deg)'
                 div.style.width = '100%'
                 div.style.height = '100%'
                 div.style.borderRadius = '6px'
@@ -263,10 +281,10 @@
             director.add(
                 stage, {
                     startStyle: {
-                        transform: 'rotateX(0deg) rotateY(0deg) translateZ(0px)'
+                        WebkitTransform: 'rotateX(0deg) rotateY(0deg) translateZ(0px)'
                     },
                     endStyle: {
-                        transform: 'rotateX(0deg) rotateY(576deg) translateZ(0px)'
+                        WebkitTransform: 'rotateX(0deg) rotateY(576deg) translateZ(0px)'
                     },
                     startIn: 0,
                     // endIn: 10
@@ -276,10 +294,10 @@
             director.add(
                 look, {
                     startStyle: {
-                        transform: 'rotateX(0deg) rotateY(0deg) translateZ(-8000px)'
+                        WebkitTransform: 'rotateX(0deg) rotateY(0deg) translateZ(-8000px)'
                     },
                     endStyle: {
-                        transform: 'rotateX(-10deg) rotateY(0deg) translateZ(300px)'
+                        WebkitTransform: 'rotateX(-10deg) rotateY(0deg) translateZ(300px)'
                     },
                     startIn: 0,
                     // endIn: 10
@@ -312,10 +330,10 @@
                         startIn: i * 15000 + 21000,
                         endIn: i * 15000 + 23000,
                         startStyle: {
-                            transform: `rotateY(${i * window.deg}deg)`,
+                            WebkitTransform: `rotateY(${i * window.deg}deg)`,
                         },
                         endStyle: {
-                            transform: `rotateY(${(i + 1) * window.deg}deg)`,
+                            WebkitTransform: `rotateY(${(i + 1) * window.deg}deg)`,
                         }
                     }, true
                 )
@@ -324,10 +342,10 @@
                         startIn: i * 15000 + 21000,
                         endIn: i * 15000 + 23000,
                         startStyle: {
-                            transform: `rotateY(${i * 14.4}deg)`,
+                            WebkitTransform: `rotateY(${i * 14.4}deg)`,
                         },
                         endStyle: {
-                            transform: `rotateY(${(i + 1) * 14.4}deg)`,
+                            WebkitTransform: `rotateY(${(i + 1) * 14.4}deg)`,
                         }
                     }, true
                 )
@@ -337,10 +355,10 @@
                         startIn: i * 15000 + 10000,
                         endIn: i * 15000 + 12000,
                         startStyle: {
-                            transform: `${item.style.transform}`,
+                            WebkitTransform: `${item.style.WebkitTransform}`,
                         },
                         endStyle: {
-                            transform: `${item.style.transform.replace(/translateZ\(.+?\)/, '')} translateZ(${window.picZ - 1000}px)`,
+                            WebkitTransform: `${item.style.WebkitTransform.replace(/translateZ\(.+?\)/, '')} translateZ(${window.picZ - 1000}px)`,
                             border: '10px solid transparent',
                         }
                     }, true
@@ -350,10 +368,10 @@
                         startIn: i * 15000 + 16000,
                         endIn: i * 15000 + 19000,
                         startStyle: {
-                            transform: `${item.style.transform}`,
+                            WebkitTransform: `${item.style.WebkitTransform}`,
                         },
                         endStyle: {
-                            transform: `${item.style.transform.replace(/translateZ\(.+?\)/, '')} translateZ(${window.picZ}px)`,
+                            WebkitTransform: `${item.style.WebkitTransform.replace(/translateZ\(.+?\)/, '')} translateZ(${window.picZ}px)`,
                             border: '10px solid #FEFAE9',
                         }
                     }, true

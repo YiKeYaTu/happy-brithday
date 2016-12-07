@@ -25,7 +25,7 @@ var Controller3D = (body, x = 0, y = 0, z = 0) => {
     }
 
     function update() {
-        body.style.transform = `rotateX(${inf.rotateX}deg) rotateY(${inf.rotateY}deg) translateZ(${inf.translateZ}px)`
+        body.style.WebkitTransform = `rotateX(${inf.rotateX}deg) rotateY(${inf.rotateY}deg) translateZ(${inf.translateZ}px)`
     }
 
     update()
@@ -73,7 +73,7 @@ class Cylinder {
             width: r,
             height: r,
             borderRadius: style.borderRadius || '100%',
-            transform: Cylinder.rotateX + ' ' + `translateZ(${parseFloat(r) / 2}px)`,
+            WebkitTransform: Cylinder.rotateX + ' ' + `translateZ(${parseFloat(r) / 2}px)`,
             position: Cylinder.position,
             top: parseFloat(style.top) + i + 'px'
         })
@@ -119,7 +119,7 @@ class CylinderX {
         if (child)
             DOM.appendChild(child)
         var mixStyle = Object.assign({}, this.style, {
-            transform: `rotateY(${deg}deg) translateZ(${len}px) scale(1.5)`,
+            WebkitTransform: `rotateY(${deg}deg) translateZ(${len}px) scale(1.5)`,
             position: CylinderX.position,
         })
         for (var key in mixStyle)
