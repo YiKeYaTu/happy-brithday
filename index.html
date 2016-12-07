@@ -48,7 +48,7 @@
     var old
     var timer
     window.addEventListener('load', function jud() {
-        var endTime = new Date('Wed Dec 8 2016 00:03:00')
+        var endTime = new Date('Wed Dec 8 2016 00:05:20')
         var dis = Date.now() - endTime.getTime() 
         if (dis > 0) {
             cover1.style.opacity = 0
@@ -65,10 +65,13 @@
     })
 
     function init() {
-        // var lookController = Controller3D(look, -10, 0, 300)
-        // var stageController = Controller3D(stage, 0, 576, 0)
-        // var cakeController = Controller3D(cakeBox, 0, 0, 0)
-        // var aroundController = Controller3D(aroundBox, 0, 0, 0)
+        setTimeout(function() {
+
+            var lookController = Controller3D(look, -10, 0, 300)
+            var stageController = Controller3D(stage, 0, 576, 0)
+            var cakeController = Controller3D(cakeBox, 0, 0, 0)
+            var aroundController = Controller3D(aroundBox, 0, 0, 0)
+        }, 8000)
         var stageinf = 'stage2'
         var lookDisabled = {
             stage1: {
