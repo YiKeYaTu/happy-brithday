@@ -16,7 +16,6 @@ p {
     top: 0;
     width: 100%;
     height: 100%;
-    // background: -webkit-gradient(radial,25 25,0,25 25,25,from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 1)));  
     z-index: 100;
 }
 #container {
@@ -60,4 +59,23 @@ p {
     bottom: 0;
     margin: auto;
     z-index: 2;
+}
+.pic-bg {
+    width: 210px;
+    height: 210px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+.pic-text {
+    margin: 0;
+    padding: 0;
+    color: #FEFAE9;
+    line-height: 210px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    opacity: 0;
+    font-size: 18px;
 }

@@ -9,7 +9,7 @@
 </head>
 <body>
     <section id="cover"></section>
-    <!-- <audio autoplay="autoplay" src="happy-birthday.mp3"></audio> -->
+    <audio autoplay="autoplay" preload src="happy-birthday.mp3"></audio>
     <section id="container">
         <section id="look">
             <section id="stage">
@@ -22,320 +22,408 @@
 <script src="anmation.js"></script>
 <script src="orienter.js"></script>
 <script>
-
-    var lookController = Controller3D(look, -20, 0, 300)
+    var lookController = Controller3D(look, -10, 0, 300)
     var stageController = Controller3D(stage, 0, 576, 0)
     var cakeController = Controller3D(cakeBox, 0, 0, 0)
     var aroundController = Controller3D(aroundBox, 0, 0, 0)
+    var stageinf = 'stage1'
+    const lookDisabled = {
+        stage1: {
+            x1: 572,
+            x2: 580, 
+            y1: -20,
+            y2: -20
+        },
+        stage2: {
+            y1: 0,
+            y2: -40
+        }
+    }
+    window.addEventListener('load', init)
 
-    window.addEventListener('load', () => {
+
+    function init() {
+        const cakeTopWidth = 300
+        const cakeCenterWidth = 300
+        const cakeBottomWidth = 300
+
+        const candleWidth = 8
+
+        let stageNo
+
+
+        function createCake() {
+            const commonStyle = {
+                left: '50%',
+                marginLeft: '-150px',
+            }
+
+            const cakeLayerTop = new Cylinder(cakeTopWidth, 50, Object.assign({
+                background: '#FEFAE9',
+                top: '100px',
+            }, commonStyle), createHappyBrithday()).appendTo(cakeBox)
+
+            const cakeLayerTopS = new Cylinder(cakeTopWidth, 20, Object.assign({
+                background: '#8A6961',
+                top: '150px'
+            }, commonStyle)).appendTo(cakeBox)
+            const cakeLayerCenter = new Cylinder(cakeCenterWidth, 50, Object.assign({
+                background: '#fcd690',
+                top: '170px'
+            }, commonStyle)).appendTo(cakeBox)
+            const cakeLayerCenterS = new Cylinder(cakeCenterWidth, 20, Object.assign({
+                background: '#8A6961',
+                top: '220px'
+            }, commonStyle)).appendTo(cakeBox)
+            const cakeLayerBottom = new Cylinder(cakeBottomWidth, 50, Object.assign({
+                background: '#febbaf',
+                top: '240px'
+            }, commonStyle)).appendTo(cakeBox)
+            const cakeLayerBottomS = new Cylinder(cakeBottomWidth, 20, Object.assign({
+                background: '#8A6961',
+                top: '290px'
+            }, commonStyle)).appendTo(cakeBox)
+
+            new Cylinder(candleWidth, 20, Object.assign({
+                background: '#8A6961',
+                top: '80px',
+                left: '-80px'
+            })).appendTo(cakeBox)
+            new Cylinder(candleWidth, 20, Object.assign({
+                background: '#FEFAE9',
+                top: '60px',
+                left: '-80px'
+            })).appendTo(cakeBox)
+            new Cylinder(candleWidth, 20, Object.assign({
+                background: '#8A6961',
+                top: '40px',
+                left: '-80px'
+            })).appendTo(cakeBox)
+            new Cylinder(candleWidth, 20, Object.assign({
+                background: '#FEFAE9',
+                top: '20px',
+                left: '-80px'
+            })).appendTo(cakeBox)
+            new Cylinder(candleWidth, 20, Object.assign({
+                background: '#8A6961',
+                top: '0px',
+                left: '-80px'
+            })).appendTo(cakeBox)
+
+            new Cylinder(candleWidth, 20, Object.assign({
+                background: '#8A6961',
+                top: '80px',
+                right: '-80px'
+            })).appendTo(cakeBox)
+            new Cylinder(candleWidth, 20, Object.assign({
+                background: '#FEFAE9',
+                top: '60px',
+                right: '-80px'
+            })).appendTo(cakeBox)
+            new Cylinder(candleWidth, 20, Object.assign({
+                background: '#8A6961',
+                top: '40px',
+                right: '-80px'
+            })).appendTo(cakeBox)
+            new Cylinder(candleWidth, 20, Object.assign({
+                background: '#FEFAE9',
+                top: '20px',
+                right: '-80px'
+            })).appendTo(cakeBox)
+            new Cylinder(candleWidth, 20, Object.assign({
+                background: '#8A6961',
+                top: '0px',
+                right: '-80px'
+            })).appendTo(cakeBox)
+
+            new Cylinder(14, 14, Object.assign({
+                background: '#febbaf',
+                top: '-20px',
+                right: '-83px',
+                borderRadius: '0px'
+            })).appendTo(cakeBox)
+            new Cylinder(14, 14, Object.assign({
+                background: '#febbaf',
+                top: '-20px',
+                left: '-83px',
+                borderRadius: '0px'
+            })).appendTo(cakeBox)
+        }
+
+        const aroundPicSrc = [{
+                text: '那一天，我们相遇了',
+                src: './a1.jpg'
+            }, {
+                text: '陌生过',
+                src: './a1.jpg'
+            }, {
+                text: '熟悉过',
+                src: './a1.jpg'
+            }, {
+                text: '相恋过',
+                src: './a1.jpg'
+            }, {
+                text: '开心过',
+                src: './a1.jpg'
+            }, {
+                text: '伤心过',
+                src: './a1.jpg'
+            }, {
+                text: '拥抱过',
+                src: './a1.jpg'
+            }, {
+                text: '一起走过了209天',
+                src: './a1.jpg'
+            }, {
+                text: '请收下我的祝福',
+                src: './a1.jpg'
+            }, {
+                text: '生日快乐',
+                src: './a1.jpg'
+            }
+        ]
+
+        function createAround() {
+            const around = new CylinderX(10, {
+                width: '210px',
+                height: '210px',
+                top: '-200px',
+                border: '10px solid #FEFAE9',
+                borderRadius: '100%',
+                overflow: 'hidden',
+            }, createAroundPic(aroundPicSrc)).appendTo(aroundBox)
+            window.deg = around.deg
+            window.picZ = around.len
+        }
+
+        function createAroundPic(aroundPicSrc) {
+            return aroundPicSrc.map(function(item) {
+                const div = document.createElement('div')
+                div.innerHTML = `
+                    <img class="pic-bg" src="${item.src}"></img>
+                    <p class="pic-text">${item.text}</p>
+                `
+                div.style.transform = 'rotateY(180deg)'
+                div.style.width = '100%'
+                div.style.height = '100%'
+                div.style.borderRadius = '6px'
+                return div
+            })
+        }
+
+        function createHappyBrithday() {
+            const content = document.createElement('p')
+            const style = {
+                width: cakeTopWidth + 'px',
+                height: cakeTopWidth + 'px',
+                lineHeight: cakeTopWidth + 'px',
+                textAlign: 'center',
+                fontSize: '30px',
+                color: '#8A6961',
+                background: 'url(logo.png) center center no-repeat',
+                backgroundSize: '220px 80px'
+            }
+            for (const key in style)
+                content.style[key] = style[key]
+            return content
+        }
+        /*
+        *
+        *  入场动画
+        *
+        */
+        function startAnmation() {
+            const director = new Anmation()
+            director.add(
+                stage, {
+                    startStyle: {
+                        transform: 'rotateX(0deg) rotateY(0deg) translateZ(0px)'
+                    },
+                    endStyle: {
+                        transform: 'rotateX(0deg) rotateY(576deg) translateZ(0px)'
+                    },
+                    startIn: 0,
+                    // endIn: 10
+                    endIn: 7000
+                }
+            )
+            director.add(
+                look, {
+                    startStyle: {
+                        transform: 'rotateX(0deg) rotateY(0deg) translateZ(-8000px)'
+                    },
+                    endStyle: {
+                        transform: 'rotateX(-10deg) rotateY(0deg) translateZ(300px)'
+                    },
+                    startIn: 0,
+                    // endIn: 10
+                    endIn: 4000
+                }
+            )
+            const x = window.innerWidth / 2
+            const y = window.innerHeight / 2
+            let r = 0
+
+            director.add(
+                cover, {
+                    startIn: 0,
+                    // endIn: 0
+                    endIn: 16000
+                }, false, () => {
+                    r += 2
+                    cover.style.background = `-webkit-gradient(radial,${x} ${y},0,${x} ${y},${r},from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 1)))`
+                }
+            )
+            setTimeout(function() {
+                stageinf = 'stage2'
+                alert('现在可以随意转动视角了哦')
+            }, (aroundPicSrc.length - 1) * 15000 + 21000)
+            for (let i = 0, len = aroundPicSrc.length; i < len; i ++) {
+                director.add(
+                    aroundBox, {
+                        startIn: i * 15000 + 21000,
+                        endIn: i * 15000 + 23000,
+                        startStyle: {
+                            transform: `rotateY(${i * window.deg}deg)`,
+                        },
+                        endStyle: {
+                            transform: `rotateY(${(i + 1) * window.deg}deg)`,
+                        }
+                    }, true
+                )
+                director.add(
+                    cakeBox, {
+                        startIn: i * 15000 + 21000,
+                        endIn: i * 15000 + 23000,
+                        startStyle: {
+                            transform: `rotateY(${i * 14.4}deg)`,
+                        },
+                        endStyle: {
+                            transform: `rotateY(${(i + 1) * 14.4}deg)`,
+                        }
+                    }, true
+                )
+                const item = aroundBox.children[aroundBox.children.length - i - 1]
+                director.add(
+                    item, {
+                        startIn: i * 15000 + 10000,
+                        endIn: i * 15000 + 12000,
+                        startStyle: {
+                            transform: `${item.style.transform}`,
+                        },
+                        endStyle: {
+                            transform: `${item.style.transform.replace(/translateZ\(.+?\)/, '')} translateZ(${window.picZ - 1000}px)`,
+                            border: '10px solid transparent',
+                            borderRadius: '0'
+                        }
+                    }, true
+                )
+                director.add(
+                    item, {
+                        startIn: i * 15000 + 16000,
+                        endIn: i * 15000 + 19000,
+                        startStyle: {
+                            transform: `${item.style.transform}`,
+                        },
+                        endStyle: {
+                            transform: `${item.style.transform.replace(/translateZ\(.+?\)/, '')} translateZ(${window.picZ}px)`,
+                            borderRadius: '100%',
+                            border: '10px solid #FEFAE9',
+                        }
+                    }, true
+                )
+                director.add(
+                    item.children[0].children[1], {
+                        startIn: i * 15000 + 10000,
+                        endIn: i * 15000 + 12000,
+                        startStyle: {
+                            opacity: 0,
+                        },
+                        endStyle: {
+                            opacity: 1,
+                        }
+                    }, true
+                )
+                director.add(
+                    item.children[0].children[0], {
+                        startIn: i * 15000 + 14000,
+                        endIn: i * 15000 + 16000,
+                        startStyle: {
+                            opacity: 0,
+                        },
+                        endStyle: {
+                            opacity: 1,
+                        }
+                    }, true
+                )
+                director.add(
+                    item, {
+                        startIn: (len - 1) * 15000 + 21000,
+                        endIn: (len - 1) * 15000 + 23000,
+                        startStyle: {
+                            opacity: 1
+                        },
+                        endStyle: {
+                            opacity: 0
+                        }
+                    }, true
+                )
+            }
+
+            director.init()
+            director.start()
+        }
+
+        (() => {
+
+            const pos = {
+                x: 0,
+                y: 0
+            }
+            let olat, olon, flag = false
+
+            setTimeout(() => {
+                const o = new Orienter({
+                    orient (inf) {
+                        if (olat)
+                            lookAround(inf.lon - olon, inf.lat - olat)
+                        olat = inf.lat
+                        olon = inf.lon
+                    }
+                })
+                o.init()
+            }, 8000)
+
+        })()
+
+        function lookAround(disX, disY) {
+            const inf = stageController.getInf()
+
+            if (inf.rotateX + disY <= lookDisabled[stageinf].y1 && inf.rotateX + disY >= lookDisabled[stageinf].y2)
+                stageController.rotateX(disY)
+            if ((inf.rotateY + disX >= lookDisabled[stageinf].x1 && inf.rotateY + disX <= lookDisabled[stageinf].x2) || !lookDisabled[stageinf].x1)
+                stageController.rotateY(disX)
+
+            stageController.update()
+        }
+
+        function lookLear(bool = true, dis = 10) {
+            const inf = lookController.getInf()
+
+            if (inf.translateZ + dis > 400 || inf.translateZ + dis < -2000)
+                return
+            if (bool)
+                lookController.translateZ(10)
+            else   
+                lookController.translateZ(-10)
+            lookController.update()
+        }
         createCake()
         createAround()
         startAnmation()
-    })
-</script>
-<script>
-    const cakeTopWidth = 300
-    const cakeCenterWidth = 300
-    const cakeBottomWidth = 300
-
-    const candleWidth = 8
-
-    let stageNo
-
-    function createCake() {
-        const commonStyle = {
-            left: '50%',
-            marginLeft: '-150px',
-        }
-
-        const cakeLayerTop = new Cylinder(cakeTopWidth, 50, Object.assign({
-            background: '#FEFAE9',
-            top: '100px',
-        }, commonStyle), createHappyBrithday()).appendTo(cakeBox)
-
-        const cakeLayerTopS = new Cylinder(cakeTopWidth, 20, Object.assign({
-            background: '#8A6961',
-            top: '150px'
-        }, commonStyle)).appendTo(cakeBox)
-        const cakeLayerCenter = new Cylinder(cakeCenterWidth, 50, Object.assign({
-            background: '#fcd690',
-            top: '170px'
-        }, commonStyle)).appendTo(cakeBox)
-        const cakeLayerCenterS = new Cylinder(cakeCenterWidth, 20, Object.assign({
-            background: '#8A6961',
-            top: '220px'
-        }, commonStyle)).appendTo(cakeBox)
-        const cakeLayerBottom = new Cylinder(cakeBottomWidth, 50, Object.assign({
-            background: '#febbaf',
-            top: '240px'
-        }, commonStyle)).appendTo(cakeBox)
-        const cakeLayerBottomS = new Cylinder(cakeBottomWidth, 20, Object.assign({
-            background: '#8A6961',
-            top: '290px'
-        }, commonStyle)).appendTo(cakeBox)
-
-        new Cylinder(candleWidth, 20, Object.assign({
-            background: '#8A6961',
-            top: '80px',
-            left: '-80px'
-        })).appendTo(cakeBox)
-        new Cylinder(candleWidth, 20, Object.assign({
-            background: '#FEFAE9',
-            top: '60px',
-            left: '-80px'
-        })).appendTo(cakeBox)
-        new Cylinder(candleWidth, 20, Object.assign({
-            background: '#8A6961',
-            top: '40px',
-            left: '-80px'
-        })).appendTo(cakeBox)
-        new Cylinder(candleWidth, 20, Object.assign({
-            background: '#FEFAE9',
-            top: '20px',
-            left: '-80px'
-        })).appendTo(cakeBox)
-        new Cylinder(candleWidth, 20, Object.assign({
-            background: '#8A6961',
-            top: '0px',
-            left: '-80px'
-        })).appendTo(cakeBox)
-
-        new Cylinder(candleWidth, 20, Object.assign({
-            background: '#8A6961',
-            top: '80px',
-            right: '-80px'
-        })).appendTo(cakeBox)
-        new Cylinder(candleWidth, 20, Object.assign({
-            background: '#FEFAE9',
-            top: '60px',
-            right: '-80px'
-        })).appendTo(cakeBox)
-        new Cylinder(candleWidth, 20, Object.assign({
-            background: '#8A6961',
-            top: '40px',
-            right: '-80px'
-        })).appendTo(cakeBox)
-        new Cylinder(candleWidth, 20, Object.assign({
-            background: '#FEFAE9',
-            top: '20px',
-            right: '-80px'
-        })).appendTo(cakeBox)
-        new Cylinder(candleWidth, 20, Object.assign({
-            background: '#8A6961',
-            top: '0px',
-            right: '-80px'
-        })).appendTo(cakeBox)
-
-        new Cylinder(14, 14, Object.assign({
-            background: '#febbaf',
-            top: '-20px',
-            right: '-83px',
-            borderRadius: '0px'
-        })).appendTo(cakeBox)
-        new Cylinder(14, 14, Object.assign({
-            background: '#febbaf',
-            top: '-20px',
-            left: '-83px',
-            borderRadius: '0px'
-        })).appendTo(cakeBox)
-    }
-
-    const aroundPicSrc = [
-        './a1.jpg', 
-        './a1.jpg',
-        './a1.jpg',
-        './a1.jpg',
-        './a1.jpg',
-        './a1.jpg',
-        './a1.jpg',
-        './a1.jpg',
-        './a1.jpg',
-        './a1.jpg'
-    ]
-
-    function createAround() {
-        const around = new CylinderX(10, {
-            width: '200px',
-            height: '200px',
-            background: '#FEFAE9',
-            top: '-300px',
-            border: '20px solid #8A6961',
-            borderRadius: '100%',
-            opacity: '0.6',
-            overflow: 'hidden'
-        }, createAroundPic(aroundPicSrc)).appendTo(aroundBox)
-        window.deg = around.deg
-        window.picZ = around.len
-    }
-
-    function createAroundPic(aroundPicSrc) {
-        return aroundPicSrc.map(function(item) {
-            const img = document.createElement('img')
-            img.src = item
-            img.style.transform = 'rotateY(180deg)'
-            img.style.width = '100%'
-            img.style.height = '100%'
-            return img
-        })
-    }
-
-    function createHappyBrithday() {
-        const content = document.createElement('p')
-        const style = {
-            width: cakeTopWidth + 'px',
-            height: cakeTopWidth + 'px',
-            lineHeight: cakeTopWidth + 'px',
-            textAlign: 'center',
-            fontSize: '30px',
-            color: '#8A6961',
-            background: 'url(logo.png) center center no-repeat',
-            backgroundSize: '220px 80px'
-        }
-        for (const key in style)
-            content.style[key] = style[key]
-        return content
     }
 </script>
 <script>
-    /*
-    *
-    *  入场动画
-    *
-    */
-    function startAnmation() {
-        const director = new Anmation()
-        director.add(
-            stage, {
-                startStyle: {
-                    transform: 'rotateX(0deg) rotateY(0deg) translateZ(0px)'
-                },
-                endStyle: {
-                    transform: 'rotateX(0deg) rotateY(576deg) translateZ(0px)'
-                },
-                startIn: 0,
-                // endIn: 10
-                endIn: 7000
-            }
-        )
-        director.add(
-            look, {
-                startStyle: {
-                    transform: 'rotateX(0deg) rotateY(0deg) translateZ(-8000px)'
-                },
-                endStyle: {
-                    transform: 'rotateX(-20deg) rotateY(0deg) translateZ(300px)'
-                },
-                startIn: 0,
-                // endIn: 10
-                endIn: 4000
-            }
-        )
-        const x = window.innerWidth / 2
-        const y = window.innerHeight / 2
-        let r = 0
-
-        director.add(
-            cover, {
-                startIn: 0,
-                // endIn: 0
-                endIn: 16000
-            }, false, () => {
-                r += 2
-                cover.style.background = `-webkit-gradient(radial,${x} ${y},0,${x} ${y},${r},from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 1)))`
-            }
-        )
-
-        for (let i = 1, len = aroundPicSrc.length + 1; i < len; i ++) {
-            director.add(
-                aroundBox, {
-                    startIn: (i + 1) * 8000,
-                    endIn: (i + 1) * 8000 + 3000,
-                    startStyle: {
-                        transform: `rotateY(${(i - 1) * window.deg}deg)`,
-                    },
-                    endStyle: {
-                        transform: `rotateY(${(i) * window.deg}deg)`,
-                    }
-                }, true
-            )
-            const item = aroundBox.children[aroundBox.children.length - i]
-            director.add(
-                item, {
-                    startIn: i * 9000,
-                    endIn: i * 9000 + 3000,
-                    startStyle: {
-                        transform: `${item.style.transform}`,
-                    },
-                    endStyle: {
-                        transform: `${item.style.transform.replace(/translateZ\(.+?\)/, '')} translateZ(${window.picZ - 1000}px)`,
-                        opacity: '1'
-                    }
-                }, true
-            )
-            director.add(
-                item, {
-                    startIn: i * 12000,
-                    endIn: i * 12000 + 3000,
-                    startStyle: {
-                        transform: `${item.style.transform}`,
-                    },
-                    endStyle: {
-                        transform: `${item.style.transform.replace(/translateZ\(.+?\)/, '')} translateZ(${window.picZ}px)`,
-                        opacity: '0.6'
-                    }
-                }, true
-            )
-        }
-        director.init()
-        director.start()
-    }
-</script>
-<script>
-    (() => {
-
-        const pos = {
-            x: 0,
-            y: 0
-        }
-        let olat, olon, flag = false
-
-        setTimeout(() => {
-            const o = new Orienter({
-                orient (inf) {
-                    if (olat)
-                        lookAround(inf.lon - olon, inf.lat - olat)
-                    olat = inf.lat
-                    olon = inf.lon
-                }
-            })
-            o.init()
-        }, 8000)
-
-    })()
-
-    function lookAround(disX, disY) {
-        const inf = stageController.getInf()
-
-        if (inf.rotateX + disY > 10 || inf.rotateX + disY < -20)
-            return
-
-        stageController.rotateY(disX)
-        stageController.rotateX(disY)
-        stageController.update()
-    }
-
-    function lookLear(bool = true, dis = 10) {
-        const inf = lookController.getInf()
-
-        if (inf.translateZ + dis > 400 || inf.translateZ + dis < -2000)
-            return
-        if (bool)
-            lookController.translateZ(10)
-        else   
-            lookController.translateZ(-10)
-        lookController.update()
-    }
 </script>
 </body>
 </html>
