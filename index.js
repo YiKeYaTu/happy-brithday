@@ -119,7 +119,7 @@ class CylinderX {
         if (child)
             DOM.appendChild(child)
         var mixStyle = Object.assign({}, this.style, {
-            transform: `rotateY(${deg}deg) translateZ(${len}px)`,
+            transform: `rotateY(${deg}deg) translateZ(${len}px) scale(1.5)`,
             position: CylinderX.position,
         })
         for (var key in mixStyle)

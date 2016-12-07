@@ -52,7 +52,7 @@
             y2: -20
         },
         stage2: {
-            y1: 30,
+            y1: 80,
             y2: -80
         }
     }
@@ -167,37 +167,7 @@
             })).appendTo(cakeBox)
 
 
-            // 祝福蛋糕
-            var commonBlessStyle = {
-                left: '50%',
-                marginLeft: '-300px',
-                borderRadius: '0px'
-            }
-            var cakeLayerTop = new Cylinder(600, 50, Object.assign({
-                background: '#FEFAE9',
-                top: '800px',
-            }, commonBlessStyle), createHappyBrithday('hahhsahsaihsaihas')).appendTo(cakeBless)
-
-            var cakeLayerTopS = new Cylinder(600, 20, Object.assign({
-                background: '#8A6961',
-                top: '850px'
-            }, commonBlessStyle)).appendTo(cakeBless)
-            var cakeLayerCenter = new Cylinder(600, 50, Object.assign({
-                background: '#fcd690',
-                top: '870px'
-            }, commonBlessStyle)).appendTo(cakeBox)
-            var cakeLayerCenterS = new Cylinder(600, 20, Object.assign({
-                background: '#8A6961',
-                top: '920px'
-            }, commonBlessStyle)).appendTo(cakeBox)
-            var cakeLayerBottom = new Cylinder(600, 50, Object.assign({
-                background: '#febbaf',
-                top: '940px'
-            }, commonBlessStyle)).appendTo(cakeBox)
-            var cakeLayerBottomS = new Cylinder(600, 20, Object.assign({
-                background: '#8A6961',
-                top: '990px'
-            }, commonBlessStyle)).appendTo(cakeBox)
+            // 祝福语
         }
 
         var aroundPicSrc = [{
@@ -458,7 +428,7 @@
 
         function lookLear(dis) {
             var inf = lookController.getInf()
-            if (inf.translateZ + dis > 400 || inf.translateZ + dis < -400)
+            if (inf.translateZ + dis > 400 || inf.translateZ + dis < -800)
                 return
             lookController.translateZ(dis)
             lookController.update()

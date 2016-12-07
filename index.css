@@ -48,7 +48,7 @@ p {
     margin: auto;
     z-index: 1;
 }
-#cakeBox, #cakeWord, #cakeBless {
+#cakeBox {
     width: 100px;
     height: 100px;
     transform-style: preserve-3d;
@@ -59,6 +59,22 @@ p {
     bottom: 0;
     margin: auto;
     z-index: 2;
+}
+#cakeBless {
+    width: 800px;
+    height: 800px;
+    transform-style: preserve-3d;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 2;
+    background: #FEFAE9;
+    border-radius: 100%;
+    transform: rotateX(90deg) translateZ(400px);
+    text-align: center;
 }
 .pic-bg {
     width: 210px;
