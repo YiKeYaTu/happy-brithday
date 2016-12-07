@@ -127,17 +127,19 @@ p {
     font-size: 18px;
 }
 #heka {
-    width: 140px;
+    width: 160px;
     height: 140px;
-    background: #FEFAE9;
     position: absolute;
+    letter-spacing: 1px;
     top: 640px;
-    -webkit-transform: translateZ(180px) rotateX(30deg);
+    -webkit-transform: translateZ(185px) rotateX(30deg);
     left: 50%;
     margin-left: -70px;
     color: #8A6961;
     font-size: 12px;
     padding: 10px 10px;
+    background: #FEFAE9 url(heart.png) 100px 124px no-repeat;
+    background-size: 20px 20px;
 }
 #heka > span {
     float: right;

@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div id="heka">
-                    宝宝生日快乐，首先恭喜宝宝又长大一岁变成大宝宝了。，未来可能遥远,但不轻易放弃
+                    宝宝生日快乐，首先恭喜宝宝又长大一岁变成大宝宝了。和宝宝度过的这半年感觉很幸福，虽然也有矛盾但也没有拆开我们，感觉两个人在一起的时间嗖的一下就过去了，一辈子会不会也这么快呢，但是不管怎么样，有你在身边就好，为我们的爱情干杯！
                     <span>by 梁宸</span>
                 </div>
             </section>
@@ -48,7 +48,7 @@
     }())
 
     
-    var old
+    var oldX, oldY
     var timer
     window.addEventListener('load', function jud() {
         var endTime = new Date('Wed Dec 8 2016 00:05:20')
@@ -472,14 +472,17 @@
             e.preventDefault()
             if(stageinf !== 'stage2')
                 return
-            old = e.touches[0].clientY
+            oldY = e.touches[0].clientY
+            oldX = e.touches[0].clientX
         })
         window.addEventListener('touchmove', function(e) {
             e.preventDefault()
             if(stageinf !== 'stage2')
                 return
-            lookLear(e.touches[0].clientY - old)
-            old = e.touches[0].clientY
+            lookLear(e.touches[0].clientY - oldY)
+            lookAround(e.touches[0].clientX - oldX, 0)
+            oldY = e.touches[0].clientY
+            oldX = e.touches[0].clientX
         })
 
     }
