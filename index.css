@@ -128,11 +128,10 @@ p {
 }
 #heka {
     width: 160px;
-    height: 140px;
     position: absolute;
     letter-spacing: 1px;
     top: 640px;
-    -webkit-transform: translateZ(185px) rotateX(30deg);
+    -webkit-transform: translateZ(190px) rotateX(30deg);
     left: 50%;
     margin-left: -70px;
     color: #8A6961;
