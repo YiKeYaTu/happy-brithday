@@ -458,7 +458,7 @@
 
         function lookLear(dis) {
             var inf = lookController.getInf()
-            if (inf.translateZ + dis > 400 || inf.translateZ + dis < -2000)
+            if (inf.translateZ + dis > 400 || inf.translateZ + dis < -400)
                 return
             lookController.translateZ(dis)
             lookController.update()
