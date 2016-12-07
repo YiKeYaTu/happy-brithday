@@ -61,19 +61,27 @@ p {
     z-index: 2;
 }
 #cakeBless {
-    width: 700px;
+    width: 800px;
     height: 700px;
     transform-style: preserve-3d;
     position: absolute;
     left: 50%;
-    top: 50%;
-    margin: -350px -350px;
+    top: -100px;
+    margin: -440px -440px;
     z-index: 2;
-    background: #FEFAE9;
+    background: #febbaf;
     border-radius: 100%;
-    transform: rotateX(90deg) translateZ(700px);
+    transform: rotateX(90deg);
     text-align: center;
-    border: 100px solid #febbaf;
+    border: 40px solid #8A6961;
+}
+#blsssCenter {
+    width: 720px;
+    height: 660px;
+    transform-style: preserve-3d;
+    background: #FEFAE9;
+    margin: 40px auto;
+    border-radius: 100%;
 }
 .pic-bg {
     width: 210px;
