@@ -343,18 +343,18 @@
                         }
                     }, true
                 )
-                director.add(
-                    cakeBox, {
-                        startIn: i * 15000 + 21000,
-                        endIn: i * 15000 + 23000,
-                        startStyle: {
-                            WebkitTransform: `rotateY(${i * 14.4}deg)`,
-                        },
-                        endStyle: {
-                            WebkitTransform: `rotateY(${(i + 1) * 14.4}deg)`,
-                        }
-                    }, true
-                )
+                // director.add(
+                //     cakeBox, {
+                //         startIn: i * 15000 + 21000,
+                //         endIn: i * 15000 + 23000,
+                //         startStyle: {
+                //             WebkitTransform: `rotateY(${i * 14.4}deg)`,
+                //         },
+                //         endStyle: {
+                //             WebkitTransform: `rotateY(${(i + 1) * 14.4}deg)`,
+                //         }
+                //     }, true
+                // )
                 var item = aroundBox.children[aroundBox.children.length - i - 1]
                 director.add(
                     item, {
