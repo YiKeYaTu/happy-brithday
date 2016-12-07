@@ -1,22 +1,22 @@
-const Controller3D = (body, x = 0, y = 0, z = 0) => {
-    const inf = {
+var Controller3D = (body, x = 0, y = 0, z = 0) => {
+    var inf = {
         rotateX: x,
         rotateY: y,
         translateZ: z
     }
 
     function rotateX(distance) {
-        const oldRotateX = getTransfrom('rotateX')
+        var oldRotateX = getTransfrom('rotateX')
         inf.rotateX = oldRotateX + distance
     }
 
     function rotateY(distance) {
-        const oldRotateY = getTransfrom('rotateY')
+        var oldRotateY = getTransfrom('rotateY')
         inf.rotateY = oldRotateY + distance
     }
 
     function translateZ(distance) {
-        const oldTranslateZ = getTransfrom('translateZ')
+        var oldTranslateZ = getTransfrom('translateZ')
         inf.translateZ = oldTranslateZ + distance
     }
     
@@ -35,14 +35,12 @@ const Controller3D = (body, x = 0, y = 0, z = 0) => {
         rotateY,
         translateZ,
         update,
-        getInf() {
+        getInf: function() {
             return inf
         }
     }
 
 }
-
-
 class Cylinder {
     constructor(r, height, style, firstElement) {
         this.r = parseFloat(r) + 'px'
@@ -52,9 +50,9 @@ class Cylinder {
         this.init()
     }
     init() {
-        const tmp = document.createDocumentFragment()
-        let child
-        for (let i = 0; i < this.height; i ++) {
+        var tmp = document.createDocumentFragment()
+        var child
+        for (var i = 0; i < this.height; i ++) {
             if (i === 0)
                 child = this.firstElement
             else
@@ -66,12 +64,12 @@ class Cylinder {
         this.DOM = tmp
     }
     createDOM(r, style, i, child) {
-        const DOM = document.createElement('div')
+        var DOM = document.createElement('div')
         if (child)
             DOM.appendChild(child)
         if (!style.top)
             throw 'style should have property: top'
-        const mixStyle = Object.assign({}, style, {
+        var mixStyle = Object.assign({}, style, {
             width: r,
             height: r,
             borderRadius: style.borderRadius || '100%',
@@ -79,7 +77,7 @@ class Cylinder {
             position: Cylinder.position,
             top: parseFloat(style.top) + i + 'px'
         })
-        for (const key in mixStyle)
+        for (var key in mixStyle)
             DOM.style[key] = mixStyle[key]
         return DOM
     }
@@ -105,11 +103,11 @@ class CylinderX {
         this.init()
     }
     init() {
-        const tmp = document.createDocumentFragment()
-        const deg = this.deg = 360 / this.num
-        const len = this.len = parseFloat(this.style.width) / 2 / Math.tan(Math.PI / this.num / 2) + this.dis
-        let DOM
-        for (let i = 0; i < this.num; i ++) {
+        var tmp = document.createDocumentFragment()
+        var deg = this.deg = 360 / this.num
+        var len = this.len = parseFloat(this.style.width) / 2 / Math.tan(Math.PI / this.num / 2) + this.dis
+        var DOM
+        for (var i = 0; i < this.num; i ++) {
             DOM = this.createDOM(deg * i, len, this.child[i])
             tmp.appendChild(DOM)
             this.DOMArr[i] = DOM
@@ -117,14 +115,14 @@ class CylinderX {
         this.DOM = tmp
     }
     createDOM(deg, len, child) {
-        const DOM = document.createElement('div') 
+        var DOM = document.createElement('div') 
         if (child)
             DOM.appendChild(child)
-        const mixStyle = Object.assign({}, this.style, {
+        var mixStyle = Object.assign({}, this.style, {
             transform: `rotateY(${deg}deg) translateZ(${len}px)`,
             position: CylinderX.position,
         })
-        for (const key in mixStyle)
+        for (var key in mixStyle)
             DOM.style[key] = mixStyle[key]
         return DOM
     }

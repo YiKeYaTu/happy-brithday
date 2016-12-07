@@ -22,12 +22,27 @@
 <script src="anmation.js"></script>
 <script src="orienter.js"></script>
 <script>
+    (function() {
+        if(!Object.assign) {
+            Object.assign = function() {
+                var arg = [].slice.call(arguments).slice(1)
+                var base = arguments[0]
+                arg.forEach(function(item) {
+                    for(var key in item) {
+                        base[key] = item[key]
+                    }
+                })
+                return base
+            }
+        }
+    }())
+
     var lookController = Controller3D(look, -10, 0, 300)
     var stageController = Controller3D(stage, 0, 576, 0)
     var cakeController = Controller3D(cakeBox, 0, 0, 0)
     var aroundController = Controller3D(aroundBox, 0, 0, 0)
-    var stageinf = 'stage1'
-    const lookDisabled = {
+    var stageinf = 'stage2'
+    var lookDisabled = {
         stage1: {
             x1: 572,
             x2: 580, 
@@ -35,51 +50,50 @@
             y2: -20
         },
         stage2: {
-            y1: 0,
-            y2: -40
+
         }
     }
     window.addEventListener('load', init)
 
 
     function init() {
-        const cakeTopWidth = 300
-        const cakeCenterWidth = 300
-        const cakeBottomWidth = 300
+        var cakeTopWidth = 300
+        var cakeCenterWidth = 300
+        var cakeBottomWidth = 300
 
-        const candleWidth = 8
+        var candleWidth = 8
 
         let stageNo
 
 
         function createCake() {
-            const commonStyle = {
+            var commonStyle = {
                 left: '50%',
                 marginLeft: '-150px',
             }
 
-            const cakeLayerTop = new Cylinder(cakeTopWidth, 50, Object.assign({
+            var cakeLayerTop = new Cylinder(cakeTopWidth, 50, Object.assign({
                 background: '#FEFAE9',
                 top: '100px',
             }, commonStyle), createHappyBrithday()).appendTo(cakeBox)
 
-            const cakeLayerTopS = new Cylinder(cakeTopWidth, 20, Object.assign({
+            var cakeLayerTopS = new Cylinder(cakeTopWidth, 20, Object.assign({
                 background: '#8A6961',
                 top: '150px'
             }, commonStyle)).appendTo(cakeBox)
-            const cakeLayerCenter = new Cylinder(cakeCenterWidth, 50, Object.assign({
+            var cakeLayerCenter = new Cylinder(cakeCenterWidth, 50, Object.assign({
                 background: '#fcd690',
                 top: '170px'
             }, commonStyle)).appendTo(cakeBox)
-            const cakeLayerCenterS = new Cylinder(cakeCenterWidth, 20, Object.assign({
+            var cakeLayerCenterS = new Cylinder(cakeCenterWidth, 20, Object.assign({
                 background: '#8A6961',
                 top: '220px'
             }, commonStyle)).appendTo(cakeBox)
-            const cakeLayerBottom = new Cylinder(cakeBottomWidth, 50, Object.assign({
+            var cakeLayerBottom = new Cylinder(cakeBottomWidth, 50, Object.assign({
                 background: '#febbaf',
                 top: '240px'
             }, commonStyle)).appendTo(cakeBox)
-            const cakeLayerBottomS = new Cylinder(cakeBottomWidth, 20, Object.assign({
+            var cakeLayerBottomS = new Cylinder(cakeBottomWidth, 20, Object.assign({
                 background: '#8A6961',
                 top: '290px'
             }, commonStyle)).appendTo(cakeBox)
@@ -150,46 +164,45 @@
             })).appendTo(cakeBox)
         }
 
-        const aroundPicSrc = [{
-                text: '那一天，我们相遇了',
+        var aroundPicSrc = [{
+                text: '那一天，我们在这里相遇',
                 src: './a1.jpg'
             }, {
-                text: '陌生过',
+                text: '在这里陌生过',
                 src: './a1.jpg'
             }, {
-                text: '熟悉过',
+                text: '在这里熟悉过',
                 src: './a1.jpg'
             }, {
-                text: '相恋过',
+                text: '在这里相恋过',
                 src: './a1.jpg'
             }, {
-                text: '开心过',
+                text: '在这里开心过',
                 src: './a1.jpg'
             }, {
-                text: '伤心过',
+                text: '在这里伤心过',
                 src: './a1.jpg'
             }, {
-                text: '拥抱过',
+                text: '在这里拥抱过',
                 src: './a1.jpg'
             }, {
                 text: '一起走过了209天',
                 src: './a1.jpg'
             }, {
-                text: '请收下我的祝福',
+                text: '恭喜宝宝啊',
                 src: './a1.jpg'
             }, {
-                text: '生日快乐',
+                text: '生日快乐！',
                 src: './a1.jpg'
             }
         ]
 
         function createAround() {
-            const around = new CylinderX(10, {
+            var around = new CylinderX(10, {
                 width: '210px',
                 height: '210px',
                 top: '-200px',
                 border: '10px solid #FEFAE9',
-                borderRadius: '100%',
                 overflow: 'hidden',
             }, createAroundPic(aroundPicSrc)).appendTo(aroundBox)
             window.deg = around.deg
@@ -198,7 +211,7 @@
 
         function createAroundPic(aroundPicSrc) {
             return aroundPicSrc.map(function(item) {
-                const div = document.createElement('div')
+                var div = document.createElement('div')
                 div.innerHTML = `
                     <img class="pic-bg" src="${item.src}"></img>
                     <p class="pic-text">${item.text}</p>
@@ -212,8 +225,8 @@
         }
 
         function createHappyBrithday() {
-            const content = document.createElement('p')
-            const style = {
+            var content = document.createElement('p')
+            var style = {
                 width: cakeTopWidth + 'px',
                 height: cakeTopWidth + 'px',
                 lineHeight: cakeTopWidth + 'px',
@@ -223,7 +236,7 @@
                 background: 'url(logo.png) center center no-repeat',
                 backgroundSize: '220px 80px'
             }
-            for (const key in style)
+            for (var key in style)
                 content.style[key] = style[key]
             return content
         }
@@ -233,7 +246,7 @@
         *
         */
         function startAnmation() {
-            const director = new Anmation()
+            var director = new Anmation()
             director.add(
                 stage, {
                     startStyle: {
@@ -260,8 +273,8 @@
                     endIn: 4000
                 }
             )
-            const x = window.innerWidth / 2
-            const y = window.innerHeight / 2
+            var x = window.innerWidth / 2
+            var y = window.innerHeight / 2
             let r = 0
 
             director.add(
@@ -269,15 +282,15 @@
                     startIn: 0,
                     // endIn: 0
                     endIn: 16000
-                }, false, () => {
+                }, false, function() {
                     r += 2
                     cover.style.background = `-webkit-gradient(radial,${x} ${y},0,${x} ${y},${r},from(rgba(0, 0, 0, 0)), to(rgba(0, 0, 0, 1)))`
                 }
             )
             setTimeout(function() {
                 stageinf = 'stage2'
-                alert('现在可以随意转动视角了哦')
-            }, (aroundPicSrc.length - 1) * 15000 + 21000)
+                alert('现在可以随意转动视角了哦, 手指上下滑动可以调节远近')
+            }, (aroundPicSrc.length - 1) * 15000 + 23000)
             for (let i = 0, len = aroundPicSrc.length; i < len; i ++) {
                 director.add(
                     aroundBox, {
@@ -303,7 +316,7 @@
                         }
                     }, true
                 )
-                const item = aroundBox.children[aroundBox.children.length - i - 1]
+                var item = aroundBox.children[aroundBox.children.length - i - 1]
                 director.add(
                     item, {
                         startIn: i * 15000 + 10000,
@@ -314,7 +327,6 @@
                         endStyle: {
                             transform: `${item.style.transform.replace(/translateZ\(.+?\)/, '')} translateZ(${window.picZ - 1000}px)`,
                             border: '10px solid transparent',
-                            borderRadius: '0'
                         }
                     }, true
                 )
@@ -327,7 +339,6 @@
                         },
                         endStyle: {
                             transform: `${item.style.transform.replace(/translateZ\(.+?\)/, '')} translateZ(${window.picZ}px)`,
-                            borderRadius: '100%',
                             border: '10px solid #FEFAE9',
                         }
                     }, true
@@ -349,7 +360,7 @@
                         startIn: i * 15000 + 14000,
                         endIn: i * 15000 + 16000,
                         startStyle: {
-                            opacity: 0,
+                            opacity: 1,
                         },
                         endStyle: {
                             opacity: 1,
@@ -374,16 +385,16 @@
             director.start()
         }
 
-        (() => {
+        (function() {
 
-            const pos = {
+            var pos = {
                 x: 0,
                 y: 0
             }
             let olat, olon, flag = false
 
-            setTimeout(() => {
-                const o = new Orienter({
+            setTimeout(function() {
+                var o = new Orienter({
                     orient (inf) {
                         if (olat)
                             lookAround(inf.lon - olon, inf.lat - olat)
@@ -397,9 +408,9 @@
         })()
 
         function lookAround(disX, disY) {
-            const inf = stageController.getInf()
+            var inf = stageController.getInf()
 
-            if (inf.rotateX + disY <= lookDisabled[stageinf].y1 && inf.rotateX + disY >= lookDisabled[stageinf].y2)
+            if ((inf.rotateX + disY <= lookDisabled[stageinf].y1 && inf.rotateX + disY >= lookDisabled[stageinf].y2) || lookDisabled[stageinf].y1 === undefined) 
                 stageController.rotateX(disY)
             if ((inf.rotateY + disX >= lookDisabled[stageinf].x1 && inf.rotateY + disX <= lookDisabled[stageinf].x2) || !lookDisabled[stageinf].x1)
                 stageController.rotateY(disX)
@@ -408,7 +419,7 @@
         }
 
         function lookLear(bool = true, dis = 10) {
-            const inf = lookController.getInf()
+            var inf = lookController.getInf()
 
             if (inf.translateZ + dis > 400 || inf.translateZ + dis < -2000)
                 return
