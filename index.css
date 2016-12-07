@@ -61,15 +61,13 @@ p {
     z-index: 2;
 }
 #cakeBless {
-    width: 1000px;
-    height: 1000px;
+    width: 700px;
+    height: 700px;
     transform-style: preserve-3d;
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
+    left: 50%;
+    top: 50%;
+    margin: -350px -350px;
     z-index: 2;
     background: #FEFAE9;
     border-radius: 100%;
