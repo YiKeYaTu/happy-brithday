@@ -55,20 +55,6 @@
     }
     var old
     window.addEventListener('load', init)
-    window.addEventListener('touchstart', function(e) {
-        e.preventDefault()
-        if(stageinf !== 'stage2')
-            return
-        old = e.touches[0].clientY
-    })
-    window.addEventListener('touchstart', function(e) {
-        e.preventDefault()
-        if(stageinf !== 'stage2')
-            return
-        lookLear(e.touches[0].clientY - old)
-        old = e.touches[0].clientY
-    })
-
 
     function init() {
         var cakeTopWidth = 300
@@ -442,6 +428,22 @@
         createCake()
         createAround()
         startAnmation()
+
+
+        window.addEventListener('touchstart', function(e) {
+            e.preventDefault()
+            if(stageinf !== 'stage2')
+                return
+            old = e.touches[0].clientY
+        })
+        window.addEventListener('touchmove', function(e) {
+            e.preventDefault()
+            if(stageinf !== 'stage2')
+                return
+            lookLear(e.touches[0].clientY - old)
+            old = e.touches[0].clientY
+        })
+
     }
 </script>
 <script>
