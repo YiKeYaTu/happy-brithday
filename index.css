@@ -128,14 +128,18 @@ p {
 }
 #heka {
     width: 140px;
-    height: 100px;
+    height: 140px;
     background: #FEFAE9;
     position: absolute;
-    top: 800px;
+    top: 640px;
     -webkit-transform: translateZ(180px) rotateX(30deg);
     left: 50%;
     margin-left: -70px;
     color: #8A6961;
     font-size: 12px;
     padding: 10px 10px;
+}
+#heka > span {
+    float: right;
+    margin-top: 10px;
 }
