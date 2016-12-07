@@ -16,7 +16,9 @@
                 <div id="aroundBox"></div>
                 <div id="cakeBox"></div>
                 <div id="cakeBless">
-                    <div id="blsssCenter"></div>
+                    <div id="blsssCenter">
+                        <div class="heart-shape"></div> 
+                    </div>
                 </div>
                 <div id="cakeWord"></div>
             </section>
@@ -377,18 +379,18 @@
                         }
                     }, true
                 )
-                director.add(
-                    item, {
-                        startIn: (len - 1) * 15000 + 21000,
-                        endIn: (len - 1) * 15000 + 23000,
-                        startStyle: {
-                            opacity: 1
-                        },
-                        endStyle: {
-                            opacity: 0
-                        }
-                    }, true
-                )
+                // director.add(
+                //     item, {
+                //         startIn: (len - 1) * 15000 + 21000,
+                //         endIn: (len - 1) * 15000 + 23000,
+                //         startStyle: {
+                //             opacity: 1
+                //         },
+                //         endStyle: {
+                //             opacity: 0
+                //         }
+                //     }, true
+                // )
             }
 
             director.init()
@@ -430,7 +432,7 @@
 
         function lookLear(dis) {
             var inf = lookController.getInf()
-            if (inf.translateZ + dis > 400 || inf.translateZ + dis < -800)
+            if (inf.translateZ + dis > 1000 || inf.translateZ + dis < -3000)
                 return
             lookController.translateZ(dis)
             lookController.update()

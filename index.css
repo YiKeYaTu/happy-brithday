@@ -102,3 +102,34 @@ p {
     opacity: 0;
     font-size: 18px;
 }
+.heart-shape{  
+    position: relative;  
+    width: 200px;  
+    height: 200px;  
+    -webkit-transform: rotate(45deg);  
+    -moz-transform: rotate(45deg);  
+    -ms-transform: rotate(45deg);  
+    -o-transform: rotate(45deg);  
+    transform: rotate(45deg);  
+    background-color: rgba(250,184,66, 1);  
+}  
+.heart-shape:before,  
+.heart-shape:after{  
+    position: absolute;  
+    width: 200px;  
+    height: 200px;  
+    content: '';  
+    -webkit-border-radius: 50%;  
+    -moz-border-radius: 50%;  
+    -o-border-radius: 50%;  
+    border-radius: 50%;  
+    background-color: rgba(250,184,66, 1);  
+}  
+.heart-shape:before{  
+    bottombottom: 0px;  
+    left: -90px;  
+}  
+.heart-shape:after{  
+    top: -90px;  
+    rightright: 0px;  
+}  
