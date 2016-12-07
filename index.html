@@ -56,11 +56,13 @@
     var old
     window.addEventListener('load', init)
     window.addEventListener('touchstart', function(e) {
+        e.preventDefault()
         if(stageinf !== 'stage2')
             return
         old = e.touches[0].clientY
     })
     window.addEventListener('touchstart', function(e) {
+        e.preventDefault()
         if(stageinf !== 'stage2')
             return
         lookLear(e.touches[0].clientY - old)
