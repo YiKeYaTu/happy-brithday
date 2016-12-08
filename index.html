@@ -11,6 +11,7 @@
     <section id="cover"></section>
     <section id="cover1"></section>
     <audio id="mp" loop="loop" preload src="happy-birthday.mp3"></audio>
+    <audio id="mysong" src="http://so1.111ttt.com:8282/2016/1/12/08/205082026353.mp3?tflag=1481200119&pin=31a833d9f945192c310886d39c1442da&ip=125.85.83.43#.mp3" controls="controls"></audio>
     <section id="container">
         <section id="look">
             <section id="stage">
@@ -22,9 +23,13 @@
                     </div>
                 </div>
                 <div id="heka">
-                    宝宝生日快乐，首先恭喜宝宝又长大一岁变成大宝宝了。和宝宝度过的这半年感觉很幸福，虽然也有矛盾但也没有拆开我们，感觉两个人在一起的时间嗖的一下就过去了，一辈子会不会也这么快呢，但是有你在身边就好，为我们的爱情干杯！爱你哟😍
+                    宝宝生日快乐，首先恭喜宝宝又长大一岁变成大宝宝了。和宝宝度过的这半年感觉很幸福，虽然也有矛盾但也没有拆开我们，感觉两个人在一起的时间嗖的一下就过去了，一辈子会不会也这么快呢，但是有你在身边就好，爱你哟😍
                     <span>by 梁宸</span>
                     <img src="heart.png">
+                </div>
+                <div id="xiangce"></div>
+                <div id="fangge">
+                    play
                 </div>
             </section>
         </section>
@@ -52,7 +57,7 @@
     var oldX, oldY
     var timer
     window.addEventListener('load', function jud() {
-        var endTime = new Date('Wed Dec 10 2016 00:00:00')
+        var endTime = new Date('Wed Dec 7 2016 00:00:00')
         var dis = Date.now() - endTime.getTime() 
         if (dis > 0) {
             cover1.style.opacity = 0
@@ -84,8 +89,6 @@
                 y2: -20
             },
             stage2: {
-                y1: 80,
-                y2: -80
             }
         }
         var cakeTopWidth = 300
@@ -328,6 +331,8 @@
             )
             setTimeout(function() {
                 stageinf = 'stage2'
+                cover1.style.display = 'none'
+                cover.style.display = 'none'
                 alert('现在可以随意转动视角了，手指上下滑动可以调节远近，场景里面藏了神秘的东西嘿嘿嘿')
             }, (aroundPicSrc.length - 1) * 15000 + 23000)
             for (let i = 0, len = aroundPicSrc.length; i < len; i ++) {
@@ -459,8 +464,8 @@
 
         function lookLear(dis) {
             var inf = lookController.getInf()
-            if (inf.translateZ + dis > 1000 || inf.translateZ + dis < -3000)
-                return
+            // if (inf.translateZ + dis > 1000 || inf.translateZ + dis < -3000)
+            //     return
             lookController.translateZ(dis)
             lookController.update()
         }
@@ -486,9 +491,20 @@
             oldX = e.touches[0].clientX
         })
 
+        fangge.addEventListener('touchstart', function(e) {
+            if (mysong.paused) {
+                mysong.play()
+                this.innerHTML = 'stop'
+            } else {
+                mysong.pause()
+                this.innerHTML = 'play'
+            }
+        })
+        mysong.addEventListener('ended', function() {
+           fangge.innerHTML = 'play' 
+        })
+
     }
-</script>
-<script>
 </script>
 </body>
 </html>
