@@ -203,10 +203,10 @@
 
         var aroundPicSrc = [{
                 text: '那一天，我们在这里相遇',
-                src: './a1.jpg'
+                src: './2105.JPG'
             }, {
                 text: '在这里陌生过',
-                src: './a1.jpg'
+                src: './2105.JPG'
             }, {
                 text: '在这里熟悉过',
                 src: './a1.jpg'
@@ -215,13 +215,13 @@
                 src: './a1.jpg'
             }, {
                 text: '在这里开心过',
-                src: './a1.jpg'
+                src: './wanwan.JPG'
             }, {
                 text: '在这里伤心过',
                 src: './a1.jpg'
             }, {
                 text: '在这里拥抱过',
-                src: './a1.jpg'
+                src: './baobao.JPG'
             }, {
                 text: '一起走过了209天',
                 src: './a1.jpg'
@@ -255,6 +255,7 @@
                     <p class="pic-text">${item.text}</p>
                 `
                 div.style.WebkitTransform = 'rotateY(180deg)'
+                div.style.WebkitTransformStyle = 'preserve-3d';
                 div.style.width = '100%'
                 div.style.height = '100%'
                 div.style.borderRadius = '6px'
@@ -494,14 +495,17 @@
         fangge.addEventListener('touchstart', function(e) {
             if (mysong.paused) {
                 mysong.play()
+                mp.stop()
                 this.innerHTML = 'stop'
             } else {
                 mysong.pause()
+                mp.play()
                 this.innerHTML = 'play'
             }
         })
         mysong.addEventListener('ended', function() {
            fangge.innerHTML = 'play' 
+           mp.play()
         })
 
     }
