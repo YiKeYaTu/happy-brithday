@@ -503,6 +503,17 @@
                 this.innerHTML = 'play'
             }
         })
+        fangge.addEventListener('click', function(e) {
+            if (mysong.paused) {
+                mysong.play()
+                mp.stop()
+                this.innerHTML = 'stop'
+            } else {
+                mysong.pause()
+                mp.play()
+                this.innerHTML = 'play'
+            }
+        })
         mysong.addEventListener('ended', function() {
            fangge.innerHTML = 'play' 
            mp.play()
